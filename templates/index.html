@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Credit Card Approval Prediction</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<style>
+
+.glass-panel{
+background:rgba(255,255,255,0.45);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,.25);
+}
+
+.glass-input{
+background:rgba(255,255,255,.6);
+border:1px solid #ccc;
+transition:.3s;
+}
+
+.glass-input:focus{
+background:white;
+outline:none;
+border-color:#2563eb;
+}
+
+#resultContainer{
+display:none;
+margin-top:25px;
+}
+
+</style>
+
+</head>
+
+<body class="bg-slate-900 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-2xl p-8 glass-panel rounded-2xl">
+
+<h1 class="text-4xl font-bold text-center text-white">
+Credit Card Approval Prediction
+</h1>
+
+<p class="text-center text-blue-300 mt-2 mb-8">
+Machine Learning Based Approval System
+</p>
+
+<form id="creditForm">
+
+<div class="mb-4">
+
+<label class="text-white font-semibold">
+Income Type
+</label>
+
+<select id="income_type"
+class="glass-input w-full p-3 rounded-lg">
+
+<option>Business Working</option>
+<option>private Employee</option>
+<option>Government Employee</option>
+
+</select>
+
+</div>
+
+<div class="grid grid-cols-2 gap-4">
+
+<div>
+
+<label class="text-white font-semibold">
+Employment Duration (Years)
+</label>
+
+<input
+type="number"
+id="employment_duration"
+class="glass-input w-full p-3 rounded-lg"
+required>
+
+</div>
+
+<div>
+
+<label class="text-white font-semibold">
+Annual Income
+</label>
+
+<input
+type="number"
+id="income_level"
+class="glass-input w-full p-3 rounded-lg"
+required>
+
+</div>
+
+</div>
+
+<div class="mt-4">
+
+<label class="text-white font-semibold">
+Credit Score
+</label>
+
+<input
+type="number"
+id="credit_score"
+class="glass-input w-full p-3 rounded-lg"
+required>
+
+</div>
+
+<button
+type="submit"
+class="w-full bg-blue-600 text-white mt-6 p-3 rounded-lg hover:bg-blue-700">
+
+Check Approval
+
+</button>
+
+</form>
+
+<div id="resultContainer">
+
+<div class="bg-white mt-6 rounded-xl p-6 text-center">
+
+<h2 class="text-2xl font-bold mb-4">
+
+Prediction Result
+
+</h2>
+
+<h1 id="predictionResult"
+class="text-3xl font-bold">
+
+</h1>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("creditForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let income=parseFloat(document.getElementById("income_level").value);
+
+let score=parseFloat(document.getElementById("credit_score").value);
+
+let years=parseFloat(document.getElementById("employment_duration").value);
+
+let result=document.getElementById("predictionResult");
+
+if(score>=700 && income>=40000 && years>=2){
+
+result.innerHTML="✅ Credit Card Approved";
+
+result.style.color="green";
+
+}
+else{
+
+result.innerHTML="❌ Credit Card Not Approved";
+
+result.style.color="red";
+
+}
+
+document.getElementById("resultContainer").style.display="block";
+
+});
+
+</script>
+
+</body>
+</html>
